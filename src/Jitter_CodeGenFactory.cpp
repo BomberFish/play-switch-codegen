@@ -23,7 +23,7 @@
 		#warning Architecture not supported
 	#endif
 
-#elif defined(__ANDROID__) || defined(__linux__) || defined(__FreeBSD__)
+#elif defined(__ANDROID__) || defined(__linux__) || defined(__FreeBSD__) || defined(SWITCH)
 
 	#if defined(__arm__)
 		#include "Jitter_CodeGen_AArch32.h"
@@ -46,7 +46,7 @@
 Jitter::CCodeGen* Jitter::CreateCodeGen()
 {
 #ifdef _WIN32
-	
+
 	#ifdef _M_X64
 		auto codeGen = new Jitter::CCodeGen_x86_64();
 		codeGen->SetPlatformAbi(CCodeGen_x86_64::PLATFORM_ABI_WIN32);
@@ -56,9 +56,9 @@ Jitter::CCodeGen* Jitter::CreateCodeGen()
 		codeGen->SetImplicitRetValueParamFixUpRequired(false);
 		return codeGen;
 	#endif
-	
+
 #elif defined(__APPLE__)
-	
+
 	#if TARGET_CPU_ARM
 		auto codeGen = new Jitter::CCodeGen_AArch32();
 		codeGen->SetPlatformAbi(CCodeGen_AArch32::PLATFORM_ABI_IOS);
@@ -77,7 +77,7 @@ Jitter::CCodeGen* Jitter::CreateCodeGen()
 		throw std::runtime_error("Unsupported architecture.");
 	#endif
 
-#elif defined(__ANDROID__) || defined(__linux__) || defined(__FreeBSD__)
+#elif defined(__ANDROID__) || defined(__linux__) || defined(__FreeBSD__) || defined(SWITCH)
 
 	#if defined(__arm__)
 		#if defined(__ARM_EABI__)
