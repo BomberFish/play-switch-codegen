@@ -39,9 +39,9 @@
 	#define MEMFUNC_USE_WASM
 #endif
 
-#if defined(SWITCH)
+// #if defined(SWITCH)
 	#define MEMFUNC_USE_LIBNX_JIT
-#endif
+// #endif
 
 #if defined(MEMFUNC_USE_WIN32)
 #include <windows.h>
